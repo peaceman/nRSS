@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75CAFCB0CA9D4C31A4F6959B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A35EE732294114BD6AF71B /* libPods.a */; };
 		BE7C6F27170A007300641A74 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7C6F26170A007300641A74 /* UIKit.framework */; };
 		BE7C6F29170A007300641A74 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7C6F28170A007300641A74 /* Foundation.framework */; };
 		BE7C6F2B170A007300641A74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7C6F2A170A007300641A74 /* CoreGraphics.framework */; };
@@ -17,10 +18,15 @@
 		BE7C6F3B170A007300641A74 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C6F3A170A007300641A74 /* Default@2x.png */; };
 		BE7C6F3D170A007300641A74 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE7C6F3C170A007300641A74 /* Default-568h@2x.png */; };
 		BE7C6F40170A007300641A74 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE7C6F3E170A007300641A74 /* MainStoryboard.storyboard */; };
-		BE7C6F43170A007300641A74 /* nRSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F42170A007300641A74 /* nRSSViewController.m */; };
+		BE7C6F4B170A014B00641A74 /* nRSSFeedsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F4A170A014B00641A74 /* nRSSFeedsController.m */; };
+		BE7C6F4E170A051C00641A74 /* FeedBinApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F4D170A051C00641A74 /* FeedBinApiClient.m */; };
+		BE7C6F54170A143300641A74 /* nRSSFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F53170A143300641A74 /* nRSSFeedController.m */; };
+		BE7C6F57170A230500641A74 /* nRSSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F56170A230500641A74 /* nRSSWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48D60E8BEFB8483593796789 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		53A35EE732294114BD6AF71B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7C6F23170A007300641A74 /* nRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7C6F26170A007300641A74 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE7C6F28170A007300641A74 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -35,8 +41,14 @@
 		BE7C6F3A170A007300641A74 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BE7C6F3C170A007300641A74 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BE7C6F3F170A007300641A74 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		BE7C6F41170A007300641A74 /* nRSSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nRSSViewController.h; sourceTree = "<group>"; };
-		BE7C6F42170A007300641A74 /* nRSSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nRSSViewController.m; sourceTree = "<group>"; };
+		BE7C6F49170A014B00641A74 /* nRSSFeedsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nRSSFeedsController.h; sourceTree = "<group>"; };
+		BE7C6F4A170A014B00641A74 /* nRSSFeedsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nRSSFeedsController.m; sourceTree = "<group>"; };
+		BE7C6F4C170A051C00641A74 /* FeedBinApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBinApiClient.h; sourceTree = "<group>"; };
+		BE7C6F4D170A051C00641A74 /* FeedBinApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBinApiClient.m; sourceTree = "<group>"; };
+		BE7C6F52170A143300641A74 /* nRSSFeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nRSSFeedController.h; sourceTree = "<group>"; };
+		BE7C6F53170A143300641A74 /* nRSSFeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nRSSFeedController.m; sourceTree = "<group>"; };
+		BE7C6F55170A230500641A74 /* nRSSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nRSSWebViewController.h; sourceTree = "<group>"; };
+		BE7C6F56170A230500641A74 /* nRSSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nRSSWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +59,7 @@
 				BE7C6F27170A007300641A74 /* UIKit.framework in Frameworks */,
 				BE7C6F29170A007300641A74 /* Foundation.framework in Frameworks */,
 				BE7C6F2B170A007300641A74 /* CoreGraphics.framework in Frameworks */,
+				75CAFCB0CA9D4C31A4F6959B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +72,7 @@
 				BE7C6F2C170A007300641A74 /* nRSS */,
 				BE7C6F25170A007300641A74 /* Frameworks */,
 				BE7C6F24170A007300641A74 /* Products */,
+				48D60E8BEFB8483593796789 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +90,7 @@
 				BE7C6F26170A007300641A74 /* UIKit.framework */,
 				BE7C6F28170A007300641A74 /* Foundation.framework */,
 				BE7C6F2A170A007300641A74 /* CoreGraphics.framework */,
+				53A35EE732294114BD6AF71B /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -86,9 +101,15 @@
 				BE7C6F35170A007300641A74 /* nRSSAppDelegate.h */,
 				BE7C6F36170A007300641A74 /* nRSSAppDelegate.m */,
 				BE7C6F3E170A007300641A74 /* MainStoryboard.storyboard */,
-				BE7C6F41170A007300641A74 /* nRSSViewController.h */,
-				BE7C6F42170A007300641A74 /* nRSSViewController.m */,
 				BE7C6F2D170A007300641A74 /* Supporting Files */,
+				BE7C6F49170A014B00641A74 /* nRSSFeedsController.h */,
+				BE7C6F4A170A014B00641A74 /* nRSSFeedsController.m */,
+				BE7C6F4C170A051C00641A74 /* FeedBinApiClient.h */,
+				BE7C6F4D170A051C00641A74 /* FeedBinApiClient.m */,
+				BE7C6F52170A143300641A74 /* nRSSFeedController.h */,
+				BE7C6F53170A143300641A74 /* nRSSFeedController.m */,
+				BE7C6F55170A230500641A74 /* nRSSWebViewController.h */,
+				BE7C6F56170A230500641A74 /* nRSSWebViewController.m */,
 			);
 			path = nRSS;
 			sourceTree = "<group>";
@@ -117,6 +138,7 @@
 				BE7C6F1F170A007300641A74 /* Sources */,
 				BE7C6F20170A007300641A74 /* Frameworks */,
 				BE7C6F21170A007300641A74 /* Resources */,
+				16AEC171F0F64A3CAD8278BB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,6 +191,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		16AEC171F0F64A3CAD8278BB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BE7C6F1F170A007300641A74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -176,7 +215,10 @@
 			files = (
 				BE7C6F33170A007300641A74 /* main.m in Sources */,
 				BE7C6F37170A007300641A74 /* nRSSAppDelegate.m in Sources */,
-				BE7C6F43170A007300641A74 /* nRSSViewController.m in Sources */,
+				BE7C6F4B170A014B00641A74 /* nRSSFeedsController.m in Sources */,
+				BE7C6F4E170A051C00641A74 /* FeedBinApiClient.m in Sources */,
+				BE7C6F54170A143300641A74 /* nRSSFeedController.m in Sources */,
+				BE7C6F57170A230500641A74 /* nRSSWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +304,7 @@
 		};
 		BE7C6F47170A007300641A74 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48D60E8BEFB8483593796789 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "nRSS/nRSS-Prefix.pch";
@@ -273,6 +316,7 @@
 		};
 		BE7C6F48170A007300641A74 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48D60E8BEFB8483593796789 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "nRSS/nRSS-Prefix.pch";
@@ -301,6 +345,7 @@
 				BE7C6F48170A007300641A74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
