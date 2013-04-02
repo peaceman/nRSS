@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface nRSSWebViewController : UIViewController
+@interface nRSSWebViewController : UIViewController <UIWebViewDelegate>
 @property (strong, nonatomic) NSDictionary* entry;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *previousButton;
+- (IBAction)loadNextEntry:(id)sender;
+- (IBAction)loadPreviousEntry:(id)sender;
+
+- (void)prepareWebViewForFeedEntry:(NSDictionary*)feedEntry;
 @end

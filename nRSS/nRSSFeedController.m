@@ -11,7 +11,7 @@
 #import "nRSSWebViewController.h"
 
 @interface nRSSFeedController ()
-
+@property (strong, nonatomic) NSMutableArray* webViewControllers;
 @end
 
 @implementation nRSSFeedController
@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     self.entries = [[NSArray alloc] init];
+    self.webViewControllers = [[NSMutableArray alloc] init];
     self.title = [self.feed objectForKey:@"title"];
     [self loadEntries];
 
@@ -82,15 +83,12 @@
     NSDictionary* entry = self.entries[indexPath.row];
     cell.textLabel.text = [entry objectForKey:@"title"];
     cell.detailTextLabel.text = [entry objectForKey:@"published"];
+
+    NSLog(@"Prepared cell for %@", entry[@"title"]);
+
+    self.webViewControllers[indexPath.row] = [self instantiateWebViewControllerForFeedEntry:entry];
     
     return cell;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-    nRSSWebViewController* webViewController = (nRSSWebViewController*)segue.destinationViewController;
-    webViewController.entry = [self.entries objectAtIndex:indexPath.row];
-
 }
 
 /*
@@ -136,6 +134,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    nRSSWebViewController* webViewController = self.webViewControllers[indexPath.row];
+    [self.navigationController pushViewController:webViewController animated:YES];
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -143,6 +143,12 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (nRSSWebViewController*)instantiateWebViewControllerForFeedEntry:(NSDictionary*)feedEntry {
+    nRSSWebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"nRSSWebViewController"];
+    [webViewController prepareWebViewForFeedEntry:feedEntry];
+    return webViewController;
 }
 
 @end

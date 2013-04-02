@@ -74,9 +74,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="VGI-4g-11v" kind="push" id="f9s-TC-BnV"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -93,27 +90,13 @@
         <!--NRSS Web View Controller-->
         <scene sceneID="c47-c3-rSo">
             <objects>
-                <viewController id="VGI-4g-11v" customClass="nRSSWebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="nRSSWebViewController" id="VGI-4g-11v" customClass="nRSSWebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UAh-M8-aIc">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pno-Rl-ohG">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pno-Rl-ohG" firstAttribute="bottom" secondItem="UAh-M8-aIc" secondAttribute="bottom" type="default" id="7Xs-mm-VYs"/>
-                            <constraint firstItem="pno-Rl-ohG" firstAttribute="top" secondItem="UAh-M8-aIc" secondAttribute="top" type="default" id="DWW-KW-V35"/>
-                            <constraint firstItem="pno-Rl-ohG" firstAttribute="trailing" secondItem="UAh-M8-aIc" secondAttribute="trailing" type="default" id="j4K-t0-c1S"/>
-                            <constraint firstItem="pno-Rl-ohG" firstAttribute="leading" secondItem="UAh-M8-aIc" secondAttribute="leading" type="default" id="kO6-bx-hB7"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XW3-C5-mG4"/>
-                    <connections>
-                        <outlet property="webView" destination="pno-Rl-ohG" id="MVB-UY-mLx"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIU-hD-CLa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
