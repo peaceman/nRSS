@@ -9,9 +9,11 @@
 #import "nRSSFeedController.h"
 #import "FeedBinApiClient.h"
 #import "nRSSWebViewController.h"
+#import "SVPullToRefresh.h"
 
 @interface nRSSFeedController ()
 @property (strong, nonatomic) NSMutableArray* webViewControllers;
+@property NSInteger lastLoadedPage;
 @end
 
 @implementation nRSSFeedController
@@ -33,6 +35,16 @@
     self.title = [self.feed objectForKey:@"title"];
     [self loadEntries];
 
+    __weak nRSSFeedController* weakSelf = self;
+
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadEntries];
+    }];
+
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadNextEntries];
+    }];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -43,15 +55,35 @@
 - (void)loadEntries
 {
     FeedBinApiClient* apiClient = [FeedBinApiClient sharedInstance];
-    [apiClient getPath:[NSString stringWithFormat:@"feeds/%@/entries.json", [self.feed objectForKey:@"feed_id"]]
+    [apiClient getPath:[NSString stringWithFormat:@"feeds/%@/entries.json", self.feed[@"feed_id"]]
             parameters:@{@"include_entry_state": @"true"}
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    self.entries = responseObject;
                    [self.tableView reloadData];
+                   [self.tableView.pullToRefreshView stopAnimating];
+                   self.lastLoadedPage = 1;
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error %@", error);
                }];
+}
+
+- (void)loadNextEntries
+{
+    if ([self.entries count] % 100 != 0) {
+        [self.tableView.infiniteScrollingView stopAnimating];
+        return;
+    }
+    
+    FeedBinApiClient* apiClient = [FeedBinApiClient sharedInstance];
+    [apiClient getPath:[NSString stringWithFormat:@"feeds/%@/entries.json", self.feed[@"feed_id"]] parameters:@{@"include_entry_state": @"true", @"page": @2} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.entries = [self.entries arrayByAddingObjectsFromArray:responseObject];
+        [self.tableView reloadData];
+        [self.tableView.infiniteScrollingView stopAnimating];
+        self.lastLoadedPage = self.lastLoadedPage + 1;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,10 +115,6 @@
     NSDictionary* entry = self.entries[indexPath.row];
     cell.textLabel.text = [entry objectForKey:@"title"];
     cell.detailTextLabel.text = [entry objectForKey:@"published"];
-
-    NSLog(@"Prepared cell for %@", entry[@"title"]);
-
-    self.webViewControllers[indexPath.row] = [self instantiateWebViewControllerForFeedEntry:entry];
     
     return cell;
 }
@@ -134,7 +162,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    nRSSWebViewController* webViewController = self.webViewControllers[indexPath.row];
+    nRSSWebViewController* webViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[indexPath.row]];
     [self.navigationController pushViewController:webViewController animated:YES];
     // Navigation logic may go here. Create and push another view controller.
     /*
