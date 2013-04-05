@@ -37,6 +37,12 @@
 {
     [super viewDidLoad];
     [self.navigationController setToolbarHidden:NO];
+    
+    UIBarButtonItem* flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem* nextEntry = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(loadNextEntry:)];
+
+    [self setToolbarItems:@[flexibleSpace, nextEntry]];
+
 //    NSURL* url = [NSURL URLWithString:self.entry[@"url"]];
 //    NSURLRequest* request = [NSURLRequest requestWithURL:url];
 //    [self.webView loadRequest:request];
@@ -65,7 +71,9 @@
     [self.webView loadRequest:request];
 }
 
-- (IBAction)loadNextEntry:(id)sender {
+- (void)loadNextEntry:(id)sender
+{
+    [self.feedManagerDelegate loadNextEntry];
 }
 
 - (IBAction)loadPreviousEntry:(id)sender {

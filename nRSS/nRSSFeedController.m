@@ -14,6 +14,7 @@
 @interface nRSSFeedController ()
 @property (strong, nonatomic) NSMutableArray* webViewControllers;
 @property NSInteger lastLoadedPage;
+@property NSInteger currentEntryIndex;
 @end
 
 @implementation nRSSFeedController
@@ -163,6 +164,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     nRSSWebViewController* webViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[indexPath.row]];
+    self.currentEntryIndex = indexPath.row;
     [self.navigationController pushViewController:webViewController animated:YES];
     // Navigation logic may go here. Create and push another view controller.
     /*
@@ -175,8 +177,17 @@
 
 - (nRSSWebViewController*)instantiateWebViewControllerForFeedEntry:(NSDictionary*)feedEntry {
     nRSSWebViewController* webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"nRSSWebViewController"];
+    webViewController.feedManagerDelegate = self;
     [webViewController prepareWebViewForFeedEntry:feedEntry];
     return webViewController;
+}
+
+- (void)loadNextEntry
+{
+    [self.navigationController popToViewController:self animated:NO];
+    self.currentEntryIndex = self.currentEntryIndex + 1;
+    nRSSWebViewController* newWebViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[self.currentEntryIndex]];
+    [self.navigationController pushViewController:newWebViewController animated:NO];
 }
 
 @end

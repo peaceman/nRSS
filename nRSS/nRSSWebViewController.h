@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "nRSSFeedController.h"
 
 @interface nRSSWebViewController : UIViewController <UIWebViewDelegate>
+@property (weak, nonatomic) nRSSFeedController* feedManagerDelegate;
 @property (strong, nonatomic) NSDictionary* entry;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *previousButton;

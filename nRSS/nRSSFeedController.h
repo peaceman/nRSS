@@ -11,4 +11,6 @@
 @interface nRSSFeedController : UITableViewController
 @property (strong, nonatomic) NSDictionary* feed;
 @property (strong, nonatomic) NSArray* entries;
+
+- (void)loadNextEntry;
 @end
