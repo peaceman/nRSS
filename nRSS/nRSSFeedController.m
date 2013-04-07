@@ -12,7 +12,7 @@
 #import "SVPullToRefresh.h"
 
 @interface nRSSFeedController ()
-@property (strong, nonatomic) NSMutableArray* webViewControllers;
+@property (strong, nonatomic) NSMutableArray* webViewControllerQueue;
 @property NSInteger lastLoadedPage;
 @property NSInteger currentEntryIndex;
 @end
@@ -32,7 +32,8 @@
 {
     [super viewDidLoad];
     self.entries = [[NSArray alloc] init];
-    self.webViewControllers = [[NSMutableArray alloc] init];
+    
+    self.webViewControllerQueue = [[NSMutableArray alloc] init];
     self.title = [self.feed objectForKey:@"title"];
     [self loadEntries];
 
@@ -163,9 +164,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.webViewControllerQueue removeAllObjects];
     nRSSWebViewController* webViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[indexPath.row]];
     self.currentEntryIndex = indexPath.row;
     [self.navigationController pushViewController:webViewController animated:YES];
+
+    [self preloadWebViewControllerForEntryAtIndex:indexPath.row + 1];
+    [self preloadWebViewControllerForEntryAtIndex:indexPath.row + 2];
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -173,6 +179,14 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (void)preloadWebViewControllerForEntryAtIndex:(NSInteger)entryIndex
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        nRSSWebViewController* nextWebViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[entryIndex]];
+        [self.webViewControllerQueue addObject:nextWebViewController];
+    });
 }
 
 - (nRSSWebViewController*)instantiateWebViewControllerForFeedEntry:(NSDictionary*)feedEntry {
@@ -186,7 +200,13 @@
 {
     [self.navigationController popToViewController:self animated:NO];
     self.currentEntryIndex = self.currentEntryIndex + 1;
-    nRSSWebViewController* newWebViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[self.currentEntryIndex]];
+//    nRSSWebViewController* newWebViewController = [self instantiateWebViewControllerForFeedEntry:self.entries[self.currentEntryIndex]];
+    nRSSWebViewController* newWebViewController;
+
+    newWebViewController = [self.webViewControllerQueue objectAtIndex:0];
+    [self.webViewControllerQueue removeObjectAtIndex:0];
+
+    [self preloadWebViewControllerForEntryAtIndex:self.currentEntryIndex + 2];
     [self.navigationController pushViewController:newWebViewController animated:NO];
 }
 
